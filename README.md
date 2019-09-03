@@ -112,17 +112,17 @@ A directory containing three directories of example data for generating linear f
 
 **The following is a list of required PERL modules used by LinearDisplay.pl:**
 
-	FindBin			: Available from https://metacpan.org/pod/FindBin
-	Math::Round		: Available from https://metacpan.org/pod/Math::Round
-	Graphics::ColorObject	: Available from https://metacpan.org/pod/Graphics::ColorObject
+	FindBin			: Available from <https://metacpan.org/pod/FindBin>
+	Math::Round		: Available from <https://metacpan.org/pod/Math::Round>
+	Graphics::ColorObject	: Available from <https://metacpan.org/pod/Graphics::ColorObject>
 	TIGR::Foundation	: Included in this distribution
 	TIGR::DisplayFunctions	: Included in this distribution
 	global_structures.ph	: Included in this distribution
 	
 ** The following is a list of other software that is required to display and convert .fig files
 
-	Xfig			: Available from https://sourceforge.net/projects/mcj/
-	fig2dev			: Also available from https://sourceforge.net/projects/mcj/
+	Xfig			: Available from <https://sourceforge.net/projects/mcj/>
+	fig2dev			: Also available from <https://sourceforge.net/projects/mcj/>
 	
 ## Citation
 
