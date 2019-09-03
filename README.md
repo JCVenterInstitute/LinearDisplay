@@ -94,24 +94,23 @@ To run LinearDisplay example datasets, cd into the desired directory (e.g., Fig1
 ## Included Files
 
 ### LinearDisplay.pl
-PDF manual including screen shots and usage guides for both the command line and the web
-interface for PanACEA
+A PERL script that generates publication quality linear genetic (e.g., open reading frame (ORF) maps) in XFig format.
 
 ### DisplayFunctions.pm
-Shell script to run the scripts required to build the PanACEA web pages for the example data
+A PERL module that provides essential subroutines for drawing linear genetic maps with LinearDisplay.pl.
 
 ### Foundation.pm
-Directory containing the example PanACEA data derived from the PanOCT run on the 19 Acinetobacter genomes:
+A PERL module that handles options and the help menu for LinearDisplay.pl
 
 ### global_structures.ph
-Compressed file containing the multi-file output of the PanACEA run on Enterobactor cited in Chan et al 2016.
+Sets-up the global hash structures as well as default values for many variables used by LinearDisplay.pl and DisplayFunctions.pm.
 
 ### examples_dir
-Compressed file containing the multi-file output of the PanACEA run on Acinetobacter genomes in the example files
+A directory containing three directories of example data for generating linear figures.
 
 ## Dependencies
 
-**The following is a list of required Perl modules used by LinearDisplay.pl:**
+**The following is a list of required PERL modules used by LinearDisplay.pl:**
 
 	FindBin			: Available from https://metacpan.org/pod/FindBin
 	Math::Round		: Available from https://metacpan.org/pod/Math::Round
@@ -119,7 +118,12 @@ Compressed file containing the multi-file output of the PanACEA run on Acinetoba
 	TIGR::Foundation	: Included in this distribution
 	TIGR::DisplayFunctions	: Included in this distribution
 	global_structures.ph	: Included in this distribution
+	
+** The following is a list of other software that is required to display and convert .fig files
 
+	Xfig			: Available from https://sourceforge.net/projects/mcj/
+	fig2dev			: Also available from https://sourceforge.net/projects/mcj/
+	
 ## Citation
 
 The following publication used this program to generate linear illustrations of bacteriophage genomes and should be used to site this program:
