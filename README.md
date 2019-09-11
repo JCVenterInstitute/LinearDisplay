@@ -115,7 +115,7 @@ A directory containing three directories of example data for generating linear f
 	FindBin			: Available from <https://metacpan.org/pod/FindBin>
 	Math::Round		: Available from <https://metacpan.org/pod/Math::Round>
 	Graphics::ColorObject	: Available from <https://metacpan.org/pod/Graphics::ColorObject>
-	TIGR::Foundation	: Included in this distribution
+	TIGR::Foundation	: Availble from <https://metacpan.org/release/TIGR>
 	TIGR::DisplayFunctions	: Included in this distribution
 	global_structures.ph	: Included in this distribution
 	
