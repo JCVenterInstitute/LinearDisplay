@@ -82,6 +82,7 @@ This module provides essential subroutines for drawing linear genetic maps.
 use strict;
 use Data::Dumper;
 use XML::Simple;
+use Math::Round qw(:all);
 require Exporter;
 
    our @ISA = ('Exporter');
@@ -524,7 +525,7 @@ sub draw_gene_elements {
 	  &draw_old_genes($global_struct,$level_ref,$gene_ref->{$fragmt_id}{$element},$color,$pen,$filled);
 	}
 	elsif ($gene_ref->{$fragmt_id}{$element}{'type'} eq "ORFNA") { # no arrowhead desired
-	  &draw_gene_block($global_struct,$level_ref,$gene_ref->{$fragmt_id}{$element},$global_struct,$color,$pen,$filled);
+	    &draw_gene_block($global_struct,$level_ref,$gene_ref->{$fragmt_id}{$element},$color,$pen,$filled);
 	}
 	elsif ($gene_ref->{$fragmt_id}{$element}{'type'} eq "CLS"){
 	  $filled = 0; # force white fill color independent of role_id
@@ -622,46 +623,49 @@ sub draw_chi_square {
 }
 
 sub draw_gene_block {
-  my ($level_ref, $gene_ref, $global_struct, $color, $pen, $filled) = @_;
-  my ($x1, $x2, $x3, $y1, $y2, $y3, $y4);
+  my ($global_struct, $level_ref, $gene_ref, $color, $pen, $filled) = @_;
+  my ($x1, $x2, $y1, $y2, $y3);
   $x1 = &x_transform($global_struct, $gene_ref->{'end5'}, $level_ref);
-  $x3 = &x_transform($global_struct, $gene_ref->{'end3'}, $level_ref);
+  $x2 = &x_transform($global_struct, $gene_ref->{'end3'}, $level_ref);
 
 #################################
+    # Coordinate diagram
+    #
+    #    $y2------------+
+    #      |            |
+    #      |            |
+    #    $y1            |
+    #      |            |
+    #      |            |
+    #    $y3------------+
+    #
+    #    $x2           $x1
+    #$end5              $end3
+#################################
 
-  #      $y2----------+
-  #       |           |
-  #      $y4----------+
-  #
-  #      $x3           $x1
+    $y1 = &line2coord($global_struct, $level_ref->{'level'}) + ($global_struct->{'gene_arrow_height'} / 2);;
+    $y2 = $y1 - ($global_struct->{'gene_height'} / 2);
+    $y3 = $y1 + ($global_struct->{'gene_height'} / 2);
+ 
 
-  #$y1 = &line2coord($global_struct, $level_ref->{'level'});
-  $y1 = &line2coord($global_struct, $level_ref->{'level'})-7;
-  $y4 = $y1;
-  $y2 = $y4 - ($global_struct->{'gene_height'})/4;
-  #$y3 = $y1 + ($global_struct->{'gene_arrow_height'} / 2); # needed for correct position of label
-  #$y2 = $y1 + ($global_struct->{'gene_arrow_height'} / 2) - ($global_struct->{'gene_height'} / 2);
-  #$y4 = $y1 + ($global_struct->{'gene_arrow_height'} / 2) + ($global_struct->{'gene_height'} / 2);
-
-  printf("2 3 0 1 %d %d %d 0 %d 0.000 0 0 0 0 0 5\n",
-	 $pen,
-	 $color,
-	 $global_struct->{'gene_depth'},
-	 $filled);
-  printf("\t %d %d %d %d %d %d %d %d %d %d\n",
-	 $x3,$y2,
-	 $x1,$y2,
-	 $x1,$y4,
-	 $x3,$y4,
-	 $x3,$y2);
-
-  #&add_label($gene_ref->{'final_name'},$x1,$x3,$y3+800,1,1,0,15); # name, x1, x3, y, 1|0 (below or above), justification (0left|1right|2center), font size in points
-  # name; x1; x2; y; position (vert=2, horz = 1, else diagonal); justification (left = 0, center = 1, right = 2); font (Times Roman = 0, Times Italix = 1, Times Bold = 2); font size; color; mid, rotation #
+   printf("2 3 0 1 %d %d %d 0 %d 0.000 0 0 0 0 0 5\n",
+	  $pen,
+	  $color,
+	  $global_struct->{'gene_depth'},
+	  $filled);
+  
+   printf("\t %d %d %d %d %d %d %d %d %d %d %d %d\n",
+	  $x2,$y2,
+	  $x1,$y2,
+	  $x1,$y3,
+	  $x2,$y3,
+	  $x2,$y2);
+   # name; x1; x2; y; position (vert=2, horz = 1, else diagonal); justification (left = 0, center = 1, right = 2); font (Times Roman = 0, Times Italix = 1, Times Bold = 2); font size; color; mid, rotation #
 
   $gene_ref->{'x1'} = $x1;
-  $gene_ref->{'x3'} = $x3;
-  $gene_ref->{'y2'} = $y1;
-  $gene_ref->{'y4'} = $y4;
+  $gene_ref->{'x2'} = $x2;
+  $gene_ref->{'y2'} = $y2;
+  $gene_ref->{'y3'} = $y3;
 }
 
 sub draw_old_genes { # old arrowhead style, pointed box really

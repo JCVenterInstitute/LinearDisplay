@@ -366,7 +366,7 @@ sub handle_level {
 
   $level_struct = &create_level_struct($fragmt_ref);
   $level_rend = &draw_level($global_struct, $level_struct, $fragmt_ref);
-  &draw_ticks($level_struct, $fragmt_ref) if ($global_struct->{'tickmark'});
+  &draw_ticks($global_struct, $level_struct, $fragmt_ref) if ($global_struct->{'tickmark'});
   &draw_gene_elements($level_struct, $fragmt_ref, $global_struct, $generef, $color_lookup);
   &draw_chi_square($level_struct, $fragmt_ref, $global_struct, $chiref);
   $global_struct->{$fragmt_ref->{'level'}} = $level_rend;
